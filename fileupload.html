@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login and File Upload</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .login-container, .upload-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    .login-container.active, .upload-container.active {
+      display: block;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div class="login-container active" id="loginContainer">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+    <p id="loginError" style="color: red; display: none;">Invalid username or password</p>
+  </div>
+
+  <!-- File Upload Page -->
+  <div class="upload-container" id="uploadContainer">
+    <h2>Upload File</h2>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">Upload</button>
+    <p id="uploadMessage" style="color: green; display: none;">File uploaded successfully!</p>
+  </div>
+
+  <script>
+    // Default credentials
+    const defaultUsername = 'admin';
+    const defaultPassword = 'password';
+
+    // Login function
+    function login() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username === defaultUsername && password === defaultPassword) {
+        document.getElementById('loginContainer').classList.remove('active');
+        document.getElementById('uploadContainer').classList.add('active');
+      } else {
+        document.getElementById('loginError').style.display = 'block';
+      }
+    }
+
+    // File upload function
+    function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const uploadMessage = document.getElementById('uploadMessage');
+
+      if (fileInput.files.length > 0) {
+        uploadMessage.style.display = 'block';
+      } else {
+        alert('Please select a file to upload.');
+      }
+    }
+  </script>
+
+</body>
+</html>
